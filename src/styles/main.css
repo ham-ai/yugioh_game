@@ -29,7 +29,7 @@
     );
 }
 
-/* container */
+/* container left */
 .container{
     position: relative;
     z-index: 3;
@@ -45,8 +45,53 @@
     justify-content: space-around;
 }
 
+/* container right */
+.container_right{
+    width: 65%;
+}
+
+/* card box container */
+.card-box_container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.3rem;
+}
+
 /* score */
 .score_box{
     background-color: #fff;
     padding: 30px;
+}
+
+.frame{
+    border: 3px solid #000;
+    border-radius: 5px;
+}
+
+/* card details left */
+.card_details{
+    background-color: #fff;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+    height: 6rem;
+    width: 100%;
+}
+
+#card-name{
+    font-size: 0.8rem;
+}
+
+#card-type{
+    font-size: 1rem;
+}
+
+/* card versus */
+.card-versus{
+    display: flex;
 }
