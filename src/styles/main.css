@@ -39,6 +39,7 @@
 
 .container_left{
     width: 35%;
+    margin: 0.5rem;
     min-width: 300px;
     flex-direction: column;
     align-items: center;
@@ -57,6 +58,15 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 0.3rem;
+}
+
+.card-box{
+    height: 9rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
 }
 
 /* score */
@@ -92,6 +102,34 @@
 }
 
 /* card versus */
-.card-versus{
+.card-versus_container{
     display: flex;
+    flex-direction: column;
+    padding-top: 0.1rem;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+}
+
+.versus-top, 
+.versus-bottom{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.versus-bottom{
+    margin-top: 1rem;
+}
+
+#next-duel{
+    display: none;
+}
+
+/* card infield */
+.card-infield{
+    height: 11.2rem;
+    width: 8rem;
+    border-radius: 8px;
+
 }
