@@ -124,27 +124,40 @@ async function checkDuelResults(playerCardId, computerCardId){
     let playerCard = cardData[playerCardId];
 
     if(playerCard.WinOf.includes(computerCardId)){
-        duelResults = "Win!";
+        duelResults = "Win";
+        await playAudio(duelResults);
         state.score.playerScore++;
     }
 
     if(playerCard.LoseOf.includes(computerCardId)){
-        duelResults = "Lose!";
+        duelResults = "Lose";
+        await playAudio(duelResults);
         state.score.computerScore++;
     }
-
-    await playAudio(duelResults);
 
     return duelResults;
 }
 
 async function drawButton(text){
-    state.button.innerText = text.toUpperCase();
+    state.actions.button.innerText = text;
     state.actions.button.style.display = "block";
 }
 
 async function updateScore(){
     state.score.scoreBox.innerText = `Win: ${state.score.playerScore} | Lose: ${state.score.computerScore}`;
+}
+
+async function resetDuel(){
+    state.cardSprites.avatar.src = "";
+    state.actions.button.style.display = "none";
+    state.fieldCards.player.style.display = "none";
+
+    init();
+}
+
+async function playAudio(status){
+    const audio = new Audio(`./src/assets/audios/${status}.mp3`);
+    audio.play();
 }
 
 function init() {
