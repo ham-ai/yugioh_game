@@ -110,6 +110,10 @@ async function setCardsField(cardId){
     state.fieldCards.player.style.display = "block";
     state.fieldCards.computer.style.display = "block";
 
+    await ShowHiddenCardFieldsImages(true);
+   
+    await hiddenCardDetails();
+
     state.fieldCards.player.src = cardData[cardId].img;
     state.fieldCards.computer.src = cardData[computerCardId].img;
 
@@ -119,21 +123,39 @@ async function setCardsField(cardId){
     await drawButton(duelResults);
 }
 
+async function hiddenCardDetails(){
+    state.cardSprites.avatar.src = "";
+    state.cardSprites.name.innerText = "Selecione";
+    state.cardSprites.type.innerText = "uma carta";
+}
+
+async function ShowHiddenCardFieldsImages(value){
+    if(value === true){
+        state.fieldCards.player.style.display = "block";
+        state.fieldCards.computer.style.display = "block";
+    }
+
+    if(value === false){
+        state.fieldCards.player.style.display = "none";
+        state.fieldCards.computer.style.display = "none";
+    }
+}
+
 async function checkDuelResults(playerCardId, computerCardId){
     let duelResults = "Draw";
     let playerCard = cardData[playerCardId];
 
     if(playerCard.WinOf.includes(computerCardId)){
         duelResults = "Win";
-        await playAudio(duelResults);
         state.score.playerScore++;
     }
 
     if(playerCard.LoseOf.includes(computerCardId)){
         duelResults = "Lose";
-        await playAudio(duelResults);
         state.score.computerScore++;
     }
+
+    await playAudio(duelResults);
 
     return duelResults;
 }
@@ -151,17 +173,29 @@ async function resetDuel(){
     state.cardSprites.avatar.src = "";
     state.actions.button.style.display = "none";
     state.fieldCards.player.style.display = "none";
+    state.fieldCards.computer.style.display = "none";
 
     init();
 }
 
+async function drawCardsInField(cardId, computerCardId){
+    state.fieldCards.player.src = cardData[cardId].img;
+    state.fieldCards.computer.src = cardData[computerCardId].img;
+}
+
 async function playAudio(status){
     const audio = new Audio(`./src/assets/audios/${status}.mp3`);
-    audio.play();
+
+    try{
+        audio.play();
+    }
+    catch{}
 }
 
 function init() {
-    //ShowHiddenCardFieldsImages(false);
+    ShowHiddenCardFieldsImages(false);
+    state.fieldCards.player.style.display = "none";
+    state.fieldCards.computer.style.display = "none";
 
     drawCards(5, state.playerSides.player1);
     drawCards(5, state.playerSides.computer);
